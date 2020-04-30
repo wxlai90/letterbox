@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ErrorDisplay from '../components/ErrorDisplay'
+import Spinner from '../components/spinner/spinner'
 
 
 const Letterbox = ({ match: { params: { sessionId } } }) => {
@@ -22,7 +23,11 @@ const Letterbox = ({ match: { params: { sessionId } } }) => {
             </div>
         )
         :
-        <ErrorDisplay>{sessionData && sessionData.result[0]}</ErrorDisplay> // refactor spinner
+        sessionData
+            ?
+            <ErrorDisplay>{sessionData && sessionData.result[0]}</ErrorDisplay>
+            :
+            <Spinner />
 }
 
 export default Letterbox
