@@ -1,9 +1,14 @@
-import React from 'react';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+import LandingPage from './pages/LandingPage'
 
 const App = () => (
-  <div>
-    <h1>LetterBox</h1>
-  </div>
+  <Router>
+    <Switch>
+      <Route path="/" component={LandingPage} />
+    </Switch>
+  </Router>
 )
 
 export default App;
