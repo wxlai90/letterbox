@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 
 
 const CustomButton = ({ children, onClick, ...props }) => {
-    console.log(props.color)
     return (
         <Button
             variant="contained"
