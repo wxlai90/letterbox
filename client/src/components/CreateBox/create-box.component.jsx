@@ -5,12 +5,12 @@ import CustomInput from '../../components/CustomInput/custom_input.component'
 import CustomButton from '../../components/CustomButton/custom_button.component'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { Container } from '@material-ui/core';
+import { Container, TextField } from '@material-ui/core';
 import VerticalContainer from '../../components/containers/vertical-container.component'
+import { Link } from 'react-router-dom'
 
 
-const CreateBox = () => {
-
+const CreateBox = (props) => {
     const DEFAUT_STATE = {
         name: '',
         description: '',
@@ -54,6 +54,20 @@ const CreateBox = () => {
                         <CardContent>
                             <VerticalContainer>
                                 Box created: {state.boxId}
+                                <h4>
+                                    Share this link:
+                                </h4>
+                                <TextField
+                                    inputProps={{
+                                        readOnly: true
+                                    }}
+                                    defaultValue={
+                                        `${window.location.origin}/${state.boxId}`
+                                    }
+                                ></TextField>
+                                <Link to={`/${state.boxId}`}>
+                                    Go to box now!
+                                </Link>
                             </VerticalContainer>
                         </CardContent>
                     </Card>
