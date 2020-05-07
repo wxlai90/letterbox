@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import { db } from '../../utils/firebase'
 
+import CustomInput from '../../components/CustomInput/custom_input.component'
+import CustomButton from '../../components/CustomButton/custom_button.component'
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { Container } from '@material-ui/core';
+import VerticalContainer from '../../components/containers/vertical-container.component'
+
 
 const CreateBox = () => {
 
@@ -12,8 +19,9 @@ const CreateBox = () => {
 
     const [state, setState] = useState(DEFAUT_STATE)
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
+
+        if (state.name.trim().length === 0) return;
 
         db.collection('boxes')
             .add({
@@ -39,27 +47,33 @@ const CreateBox = () => {
 
 
     return (
-        <div>
-            <h1>Create a new box</h1>
-            <form onSubmit={handleSubmit}>
-                Your name:
-                <input type="text"
-                    value={state.name}
-                    name="name"
-                    onChange={handleChange}
-                />
-                <button type="submit">Get a box!</button>
-            </form>
-
-
+        <Container maxwidth="sm" style={{ maxWidth: "500px", marginTop: "30vh" }}>
             {
                 state.boxId && (
-                    <div>
-                        Box created: {state.boxId}
-                    </div>
+                    <Card>
+                        <CardContent>
+                            <VerticalContainer>
+                                Box created: {state.boxId}
+                            </VerticalContainer>
+                        </CardContent>
+                    </Card>
                 )
             }
-        </div>
+            <Card>
+                <CardContent>
+                    <VerticalContainer>
+                        <CustomInput
+                            value={state.name}
+                            onChange={handleChange}
+                            name="name"
+                            label="Name"
+                            required
+                        />
+                        <CustomButton onClick={handleSubmit}>Get me a Box!</CustomButton>
+                    </VerticalContainer>
+                </CardContent>
+            </Card>
+        </Container>
     )
 }
 

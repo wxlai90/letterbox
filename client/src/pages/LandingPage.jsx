@@ -21,6 +21,7 @@ const LandingPage = ({ history }) => {
                             value={boxId}
                             onChange={e => setBoxId(e.target.value)}
                             label="Box Id"
+                            required
                         />
                         <CustomButton onClick={() => history.push(`/${boxId}`)}>Go</CustomButton>
                     </VerticalContainer>
