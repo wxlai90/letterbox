@@ -3,11 +3,12 @@ import Button from '@material-ui/core/Button';
 
 
 const CustomButton = ({ children, onClick, ...props }) => {
+    console.log(props.color)
     return (
         <Button
             variant="contained"
-            color="secondary"
-            style={{ marginTop: '5px' }}
+            color={`${props.color ? props.color : "secondary"}`}
+            style={{ margin: '5px 0 10px 0' }}
             onClick={onClick}
         >
             {children}

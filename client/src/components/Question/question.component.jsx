@@ -4,7 +4,16 @@ import { connect } from 'react-redux'
 import { setQuestionFocus, addUpvoted } from '../../redux/question/question.actions'
 import { db } from '../../utils/firebase'
 import firebase from 'firebase'
+import Badge from '@material-ui/core/Badge';
+import MailIcon from '@material-ui/icons/Mail';
+import HorizontalContainer from '../../components/containers/horizontal-container.component'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import './question.styles.css'
+import VerticalContainer from '../containers/vertical-container.component'
+import Divider from '@material-ui/core/Divider';
+import CustomInput from '../../components/CustomInput/custom_input.component'
+import CustomButton from '../../components/CustomButton/custom_button.component'
+import { Container } from '@material-ui/core'
 
 
 const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvoted, ...props }) => {
@@ -39,9 +48,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
             })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
+    const handleSubmit = () => {
         if (newComment.trim().length === 0) return;
 
         db.collection(`boxes/${boxId}/questions/${props.question.id}/comments`)
@@ -55,25 +62,36 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
     useEffect(getComments, [])
 
     return (
-        <div className="question-container" onClick={() => showCommentsForThisQuestion(props.question.id)}>
-            <h3>{props.question.text} - {props.question.votes} Votes</h3>
-            <button onClick={upvoteQuestion}>Upvote</button>
+        <Container onClick={() => showCommentsForThisQuestion(props.question.id)} style={{ margin: '20px 0', borderBottom: '1px solid #ccc' }}>
+            <VerticalContainer>
+                <h4>{props.question.text}</h4>
+                <Divider style={{ margin: '10px 0' }} />
+                <HorizontalContainer>
+                    {props.question.votes} Votes
+                    <KeyboardArrowUpIcon onClick={upvoteQuestion} />
+                </HorizontalContainer>
+                <Divider style={{ margin: '10px 0' }} />
+            </VerticalContainer>
             {
                 focusedQuestionId === props.question.id &&
                 comments.sort((a, b) => a.timestamp - b.timestamp).map(comment => (
                     <Comment comment={comment} />
                 ))
             }
-            <form onSubmit={handleSubmit}>
-                <textarea placeholder="add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)}></textarea>
-                <button>Add Comment</button>
-            </form>
+            <VerticalContainer>
+                <CustomInput label="add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+                <CustomButton onClick={handleSubmit}>Add</CustomButton>
+            </VerticalContainer>
+
+
             <span>
                 {
-                    `${comments.length} ${comments.length === 1 ? 'comment' : 'comments'}`
+                    <Badge badgeContent={comments.length} color="secondary" style={{ cursor: 'pointer', marginBottom: '10px' }}>
+                        <MailIcon />
+                    </Badge>
                 }
             </span>
-        </div>
+        </Container>
     )
 }
 

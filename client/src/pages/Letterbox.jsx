@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Spinner from '../components/spinner/spinner'
 import Question from '../components/Question/question.component'
 import { db } from '../utils/firebase'
+import { Container } from '@material-ui/core';
+import VerticalContainer from '../components/containers/vertical-container.component'
+import CustomInput from '../components/CustomInput/custom_input.component'
+import CustomButton from '../components/CustomButton/custom_button.component'
 
 
 const Letterbox = (props) => {
@@ -70,17 +74,22 @@ const Letterbox = (props) => {
         ?
         (
             <div>
-                <h1>Box for {box && box.metadata.createdBy}</h1>
-                <div>
-                    <h3>Add a question</h3>
-                    <textarea onChange={handleNewQuestion} value={newQuestion}></textarea>
-                    <button onClick={addQuestion}>Add Question</button>
-                </div>
-                {
-                    questions.map(question => (
-                        <Question question={question} key={question.id} boxId={boxId} />
-                    ))
-                }
+                <Container maxWidth="sm" style={{border: '2px solid #ccc'}}>
+                    <h1>Box for {box && box.metadata.createdBy}</h1>
+
+                    <VerticalContainer>
+                        <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
+                        <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
+                    </VerticalContainer>
+
+                    <VerticalContainer>
+                        {
+                            questions.map(question => (
+                                <Question question={question} key={question.id} boxId={boxId} />
+                            ))
+                        }
+                    </VerticalContainer>
+                </Container>
             </div>
         )
         : <Spinner />
