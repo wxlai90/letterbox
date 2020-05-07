@@ -64,6 +64,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
     return (
         <Container onClick={() => showCommentsForThisQuestion(props.question.id)} style={{ margin: '20px 0', borderBottom: '1px solid #ccc' }}>
             <VerticalContainer>
+                <h3>Question: </h3>
                 <h4>{props.question.text}</h4>
                 <Divider style={{ margin: '10px 0' }} />
                 <HorizontalContainer>
@@ -72,6 +73,8 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
                 </HorizontalContainer>
                 <Divider style={{ margin: '10px 0' }} />
             </VerticalContainer>
+
+            <h4>Comments: </h4>
             {
                 focusedQuestionId === props.question.id &&
                 comments.sort((a, b) => a.timestamp - b.timestamp).map(comment => (

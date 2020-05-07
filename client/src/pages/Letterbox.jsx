@@ -74,17 +74,18 @@ const Letterbox = (props) => {
         ?
         (
             <div>
-                <Container maxWidth="sm" style={{border: '2px solid #ccc'}}>
+                <Container maxWidth="sm" style={{ border: '2px solid #ccc' }}>
                     <h1>Box for {box && box.metadata.createdBy}</h1>
 
-                    <VerticalContainer>
+                    <VerticalContainer style={{ marginBottom: '50px' }}>
                         <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
                         <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
                     </VerticalContainer>
 
                     <VerticalContainer>
                         {
-                            questions.map(question => (
+                            questions.sort((a, b) => b.votes - a.votes)
+                            .map(question => (
                                 <Question question={question} key={question.id} boxId={boxId} />
                             ))
                         }
