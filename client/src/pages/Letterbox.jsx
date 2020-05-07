@@ -3,48 +3,16 @@ import ErrorDisplay from '../components/ErrorDisplay'
 import Spinner from '../components/spinner/spinner'
 import Question from '../components/Question/question.component'
 import { db } from '../utils/firebase'
-import firebase from 'firebase'
 
 
-const Letterbox = ({ match: { params: { boxId } } }) => {
+const Letterbox = (props) => {
+
+    const { match: { params: { boxId } } } = props;
 
     const [box, setBox] = useState(null)
     const [questions, setQuestions] = useState([])
     const [newQuestion, setNewQuestion] = useState('')
 
-    const schema = {
-        metadata: {
-            createdBy: 'Someone'
-        },
-        questions: [
-            {
-                id: 1,
-                text: 'Question1 Text',
-                timestamp: 1588849877196,
-                comments: [
-                    {
-                        id: 1,
-                        text: 'Comment Text',
-                        timestamp: 1588849677196,
-                        by: 'name/anonymous'
-                    }
-                ]
-            },
-            {
-                id: 2,
-                text: 'Question2 Text',
-                timestamp: 1588849877196,
-                comments: [
-                    {
-                        id: 2,
-                        text: 'Comment Text',
-                        timestamp: 1588849677196,
-                        by: 'name/anonymous'
-                    }
-                ]
-            }
-        ]
-    }
 
     const getBox = () => {
         db.collection('boxes')
@@ -56,14 +24,22 @@ const Letterbox = ({ match: { params: { boxId } } }) => {
     }
 
     const getQuestions = () => {
-
         db.collection('boxes')
             .doc(boxId)
-            .collection('questions')
-            .onSnapshot(snapshot => {
-                const questions = [];
-                snapshot.forEach(doc => questions.push({ id: doc.id, ...doc.data() }))
-                setQuestions(questions)
+            .get()
+            .then(snapshot => {
+                if (!snapshot.exists) {
+                    props.history.push('/')
+                } else {
+                    db.collection('boxes')
+                        .doc(boxId)
+                        .collection('questions')
+                        .onSnapshot(snapshot => {
+                            const questions = [];
+                            snapshot.forEach(doc => questions.push({ id: doc.id, ...doc.data() }))
+                            setQuestions(questions)
+                        })
+                }
             })
     }
 
