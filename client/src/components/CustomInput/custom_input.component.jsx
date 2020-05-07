@@ -1,13 +1,14 @@
 import React from 'react'
+import { TextField } from '@material-ui/core';
 
-const CustomInput = ({ children, label, ...props }) => {
+const CustomInput = ({ children, label, placeholder, value, onChange, ...props }) => {
     return (
-        <label>
-            {
-                label
-            }
-            <input {...props} />
-        </label>
+        <TextField
+            label={label}
+            variant="outlined"
+            value={value}
+            onChange={onChange}
+        />
     )
 }
 

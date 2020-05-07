@@ -1,25 +1,18 @@
 import React from 'react'
-import styled from 'styled-components'
+import Button from '@material-ui/core/Button';
 
 
-const StyledButton = styled.button`
-    background-color: black;
-    color: whitesmoke;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    &:hover {
-        background-color: white;
-        color: black;
-        border: 1px solid black;
-    }
-`
-
-const CustomButton = ({ children, ...props }) => (
-    <StyledButton {...props}>
-        {children}
-    </StyledButton>
-)
+const CustomButton = ({ children, onClick, ...props }) => {
+    return (
+        <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginTop: '5px' }}
+            onClick={onClick}
+        >
+            {children}
+        </Button>
+    )
+}
 
 export default CustomButton
