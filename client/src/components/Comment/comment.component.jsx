@@ -3,7 +3,7 @@ import React from 'react'
 
 const Comment = ({ comment }) => {
     return (
-        <p>{comment}</p>
+        <p>{comment.text} - commented at {new Date(comment.timestamp).toLocaleTimeString("en-US") + ''}</p>
     )
 }
 

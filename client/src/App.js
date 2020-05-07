@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import LandingPage from './pages/LandingPage'
 import Letterbox from './pages/Letterbox'
+import CreateBox from './components/CreateBox/create-box.component'
 
 const App = () => (
   <Router>
     <Switch>
       <Route path="/" exact component={LandingPage} />
-      <Route path="/:sessionId" exact component={Letterbox} />
+      <Route path="/box/new" exact component={CreateBox} />
+      <Route path="/:boxId" exact component={Letterbox} />
     </Switch>
   </Router>
 )
