@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Comment from '../Comment/comment.component'
 import { connect } from 'react-redux'
-import { setQuestionFocus } from '../../redux/question/question.actions'
+import { setQuestionFocus, addUpvoted } from '../../redux/question/question.actions'
 import { db } from '../../utils/firebase'
 import firebase from 'firebase'
 import './question.styles.css'
 
 
-const Question = ({ setQuestionFocus, focusedQuestionId, boxId, ...props }) => {
+const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvoted, ...props }) => {
 
 
     const [comments, setComments] = useState([])
@@ -26,10 +26,14 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, ...props }) => {
         setQuestionFocus(questionId)
     }
 
-
     const upvoteQuestion = () => {
+        const questionId = props.question.id;
+        if (upvoted.indexOf(questionId) !== -1) return;
+
+        addUpvoted(questionId)
+
         db.collection(`boxes/${boxId}/questions`)
-            .doc(props.question.id)
+            .doc(questionId)
             .update({
                 votes: firebase.firestore.FieldValue.increment(1)
             })
@@ -75,11 +79,13 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, ...props }) => {
 
 
 const mapStateToProps = state => ({
-    focusedQuestionId: state.question.questionId
+    focusedQuestionId: state.question.questionId,
+    upvoted: state.question.upvoted
 })
 
 const mapDispatchToProps = dispatch => ({
-    setQuestionFocus: (questionId) => dispatch(setQuestionFocus(questionId))
+    setQuestionFocus: (questionId) => dispatch(setQuestionFocus(questionId)),
+    addUpvoted: (questionId) => dispatch(addUpvoted(questionId))
 })
 
 

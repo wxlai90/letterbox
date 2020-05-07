@@ -2,7 +2,8 @@ import { QuestionTypes } from './question.types'
 
 
 const INITIAL_STATE = {
-    questionId: null
+    questionId: null,
+    upvoted: []
 }
 
 const QuestionReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +12,11 @@ const QuestionReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 questionId: action.payload
+            }
+        case QuestionTypes.ADD_UPVOTED:
+            return {
+                ...state,
+                upvoted: [...state.upvoted, action.payload]
             }
         default:
             return state

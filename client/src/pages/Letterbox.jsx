@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import ErrorDisplay from '../components/ErrorDisplay'
 import Spinner from '../components/spinner/spinner'
 import Question from '../components/Question/question.component'
 import { db } from '../utils/firebase'
@@ -67,21 +66,24 @@ const Letterbox = (props) => {
         getQuestions();
     }, [])
 
-    return (
-        <div>
-            <h1>Box for {box && box.metadata.createdBy}</h1>
+    return box
+        ?
+        (
             <div>
-                <h3>Add a question</h3>
-                <textarea onChange={handleNewQuestion} value={newQuestion}></textarea>
-                <button onClick={addQuestion}>Add Question</button>
+                <h1>Box for {box && box.metadata.createdBy}</h1>
+                <div>
+                    <h3>Add a question</h3>
+                    <textarea onChange={handleNewQuestion} value={newQuestion}></textarea>
+                    <button onClick={addQuestion}>Add Question</button>
+                </div>
+                {
+                    questions.map(question => (
+                        <Question question={question} key={question.id} boxId={boxId} />
+                    ))
+                }
             </div>
-            {
-                questions.map(question => (
-                    <Question question={question} key={question.id} boxId={boxId} />
-                ))
-            }
-        </div>
-    )
+        )
+        : <Spinner />
 }
 
 export default Letterbox
