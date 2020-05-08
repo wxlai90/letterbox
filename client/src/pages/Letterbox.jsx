@@ -58,7 +58,7 @@ const Letterbox = (props) => {
         const questionToAdd = {
             text: newQuestion,
             timestamp: + new Date(),
-            votes: 0
+            upvotes: 0
         }
 
         db.collection('boxes')
@@ -87,7 +87,7 @@ const Letterbox = (props) => {
 
                     <VerticalContainer>
                         {
-                            questions.sort((a, b) => b.votes - a.votes)
+                            questions.sort((a, b) => b.upvotes - a.upvotes)
                                 .map(question => (
                                     <Question question={question} key={question.id} boxId={boxId} />
                                 ))
