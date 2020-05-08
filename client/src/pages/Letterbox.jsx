@@ -32,7 +32,10 @@ const Letterbox = (props) => {
             .get()
             .then(snapshot => {
                 if (!snapshot.exists) {
-                    props.history.push('/')
+                    props.history.push({
+                        pathname: '/',
+                        state: { error: `Box: ${boxId} cannot be found!` }
+                    })
                 } else {
                     db.collection('boxes')
                         .doc(boxId)
@@ -85,9 +88,9 @@ const Letterbox = (props) => {
                     <VerticalContainer>
                         {
                             questions.sort((a, b) => b.votes - a.votes)
-                            .map(question => (
-                                <Question question={question} key={question.id} boxId={boxId} />
-                            ))
+                                .map(question => (
+                                    <Question question={question} key={question.id} boxId={boxId} />
+                                ))
                         }
                     </VerticalContainer>
                 </Container>

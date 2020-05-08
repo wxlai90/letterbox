@@ -14,7 +14,7 @@ const InnerSpinner = styled.div`
     height: 50px;
     border-radius: 50%;
     border: 5px solid #ccc;
-    border-right: 5px solid teal;
+    border-right: 5px solid rgb(252, 64, 95);
     -webkit-animation: spin 0.9s linear infinite;
     animation: spin 0.9s linear infinite;
 

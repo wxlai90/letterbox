@@ -47,7 +47,7 @@ const CreateBox = (props) => {
 
 
     return (
-        <Container maxwidth="sm" style={{ maxWidth: "500px", marginTop: "30vh" }}>
+        <Container maxwidth="sm" style={{ maxWidth: "500px", marginTop: "10vh" }}>
             {
                 state.boxId && (
                     <Card>
@@ -76,6 +76,9 @@ const CreateBox = (props) => {
             <Card>
                 <CardContent>
                     <VerticalContainer>
+                        <div>
+                            Display name for box creator
+                        </div>
                         <CustomInput
                             value={state.name}
                             onChange={handleChange}

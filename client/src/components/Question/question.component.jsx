@@ -68,6 +68,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
                 <h4>{props.question.text}</h4>
                 <Divider style={{ margin: '10px 0' }} />
                 <HorizontalContainer>
+                    {/* rename to upvotes */}
                     {props.question.votes} Votes
                     <KeyboardArrowUpIcon onClick={upvoteQuestion} />
                 </HorizontalContainer>
