@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Container, TextField } from '@material-ui/core';
 import VerticalContainer from '../../components/containers/vertical-container.component'
 import { Link } from 'react-router-dom'
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const CreateBox = (props) => {
@@ -18,6 +19,7 @@ const CreateBox = (props) => {
     }
 
     const [state, setState] = useState(DEFAUT_STATE)
+    const [copiedNotification, setCopiedNotification] = useState('')
 
     const handleSubmit = () => {
 
@@ -45,6 +47,12 @@ const CreateBox = (props) => {
         })
     }
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(`${window.location.origin}/${state.boxId}`)
+        setCopiedNotification('Link Copied!')
+        setTimeout(() => { setCopiedNotification('') }, 1000)
+    }
+
 
     return (
         <Container maxwidth="sm" style={{ maxWidth: "500px", marginTop: "10vh" }}>
@@ -55,15 +63,16 @@ const CreateBox = (props) => {
                             <VerticalContainer>
                                 Box created: {state.boxId}
                                 <h4>
-                                    Share this link:
+                                    Share this link: <span style={{ color: 'rgb(71, 91, 179)' }}>{copiedNotification}</span>
                                 </h4>
                                 <TextField
                                     inputProps={{
                                         readOnly: true
                                     }}
-                                    defaultValue={
+                                    value={
                                         `${window.location.origin}/${state.boxId}`
                                     }
+                                    onClick={copyToClipboard}
                                 ></TextField>
                                 <Link to={`/${state.boxId}`}>
                                     Go to box now!
