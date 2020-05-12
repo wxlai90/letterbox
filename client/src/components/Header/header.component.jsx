@@ -6,7 +6,7 @@ const Header = () => {
 
     const styles = {
         backgroundColor: 'rgb(252, 64, 95)',
-        marginBottom: '100px'
+        marginBottom: '10px'
     }
 
 

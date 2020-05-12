@@ -62,7 +62,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
     useEffect(getComments, [])
 
     return (
-        <Container onClick={() => showCommentsForThisQuestion(props.question.id)} style={{ margin: '20px 0', borderBottom: '1px solid #ccc' }}>
+        <Container className="question-container" onClick={() => showCommentsForThisQuestion(props.question.id)}>
             <VerticalContainer>
                 <h3>Question: </h3>
                 <h4>{props.question.text}</h4>

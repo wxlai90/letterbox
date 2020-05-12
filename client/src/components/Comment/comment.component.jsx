@@ -1,9 +1,10 @@
 import React from 'react'
+import './comment.styles.css'
 
 
 const Comment = ({ comment }) => {
     return (
-        <p style={{ wordBreak: 'break-all' }}>{comment.text} - commented at {new Date(comment.timestamp).toLocaleTimeString("en-US") + ''}</p>
+        <p className="comment-item">{comment.text} - commented at {new Date(comment.timestamp).toLocaleTimeString("en-US") + ''}</p>
     )
 }
 

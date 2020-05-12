@@ -84,6 +84,7 @@ const Letterbox = (props) => {
                         <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
                         <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
                     </VerticalContainer>
+                    <hr />
 
                     <VerticalContainer>
                         {
