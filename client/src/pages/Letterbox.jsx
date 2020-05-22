@@ -77,7 +77,7 @@ const Letterbox = (props) => {
         ?
         (
             <div>
-                <Container maxWidth="sm" style={{ border: '2px solid #ccc' }}>
+                <Container maxWidth="md">
                     <h1>Box for {box && box.metadata.createdBy}</h1>
 
                     <VerticalContainer style={{ marginBottom: '50px' }}>

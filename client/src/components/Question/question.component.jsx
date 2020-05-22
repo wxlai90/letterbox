@@ -69,7 +69,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
                 <Divider style={{ margin: '10px 0' }} />
                 <HorizontalContainer>
                     {props.question.upvotes} Votes
-                    <KeyboardArrowUpIcon onClick={upvoteQuestion} />
+                    <KeyboardArrowUpIcon onClick={upvoteQuestion} style={{ cursor: 'pointer' }} />
                 </HorizontalContainer>
                 <Divider style={{ margin: '10px 0' }} />
             </VerticalContainer>
