@@ -8,6 +8,14 @@ import CustomInput from '../components/CustomInput/custom_input.component'
 import CustomButton from '../components/CustomButton/custom_button.component'
 
 
+const DisplayBox = ({ name }) => {
+
+    return (
+        <h1><span style={{ fontFamily: 'Dancing Script' }}>Box for {name}</span></h1>
+    )
+}
+
+
 const Letterbox = (props) => {
 
     const { match: { params: { boxId } } } = props;
@@ -78,7 +86,10 @@ const Letterbox = (props) => {
         (
             <div>
                 <Container maxWidth="md">
-                    <h1>Box for {box && box.metadata.createdBy}</h1>
+                    {
+                        box &&
+                        <DisplayBox name={box.metadata.createdBy} />
+                    }
 
                     <VerticalContainer style={{ marginBottom: '50px' }}>
                         <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />

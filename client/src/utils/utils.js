@@ -34,3 +34,13 @@ export const lessThanNMinutesAgo = (timestamp) => {
     const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     return diffMins
 }
+
+
+/* String Utils */
+export const firstLetterToUpper = (s) => {
+    return s.substr(0, 1).toUpperCase() + s.substr(1)
+}
+
+export const addQuestionMark = (s) => {
+    return (s.substr(s.length - 1) === '?') ? s : s + '?'
+}

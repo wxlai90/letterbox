@@ -14,6 +14,8 @@ import Divider from '@material-ui/core/Divider';
 import CustomInput from '../../components/CustomInput/custom_input.component'
 import CustomButton from '../../components/CustomButton/custom_button.component'
 import { Container } from '@material-ui/core'
+import { firstLetterToUpper, addQuestionMark } from '../../utils/utils'
+
 
 
 const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvoted, ...props }) => {
@@ -59,17 +61,20 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
             .then(_ => setNewComment(''))
     }
 
+    const formatQuestion = (s) => {
+        return addQuestionMark(firstLetterToUpper(s))
+    }
+
     useEffect(getComments, [])
 
     return (
         <Container className="question-container" onClick={() => showCommentsForThisQuestion(props.question.id)}>
             <VerticalContainer>
-                <h3>Question: </h3>
-                <h4>{props.question.text}</h4>
+                <h4 style={{ fontFamily: 'Ubuntu' }}>{formatQuestion(props.question.text)}</h4>
                 <Divider style={{ margin: '10px 0' }} />
-                <HorizontalContainer>
+                <HorizontalContainer onClick={upvoteQuestion} style={{ cursor: 'pointer' }}>
                     {props.question.upvotes} Votes
-                    <KeyboardArrowUpIcon onClick={upvoteQuestion} style={{ cursor: 'pointer' }} />
+                    <KeyboardArrowUpIcon />
                 </HorizontalContainer>
                 <Divider style={{ margin: '10px 0' }} />
             </VerticalContainer>
@@ -89,7 +94,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
 
             <span>
                 {
-                    <Badge badgeContent={comments.length} color="secondary" style={{ cursor: 'pointer', marginBottom: '10px' }}>
+                    <Badge badgeContent={comments.length} color="secondary" style={{ cursor: 'pointer', marginTop: '10px' }}>
                         <MailIcon />
                     </Badge>
                 }

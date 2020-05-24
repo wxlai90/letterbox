@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import { Container, TextField } from '@material-ui/core';
 import VerticalContainer from '../../components/containers/vertical-container.component'
 import { Link } from 'react-router-dom'
-import Tooltip from '@material-ui/core/Tooltip';
 
 
 const CreateBox = (props) => {

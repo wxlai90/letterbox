@@ -3,4 +3,5 @@
     border-image: linear-gradient(to right, rgb(145, 141, 141) , rgb(255, 0, 128));
     border-image-slice: 1;
     margin: 20px 0;
+    padding: 15px 20px;
 }
