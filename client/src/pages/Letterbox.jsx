@@ -10,8 +10,13 @@ import CustomButton from '../components/CustomButton/custom_button.component'
 
 const DisplayBox = ({ name }) => {
 
+    const styles = {
+        fontFamily: 'Montserrat',
+        fontSize: '2.5rem',
+    }
+
     return (
-        <h1><span style={{ fontFamily: 'Dancing Script' }}>Box for {name}</span></h1>
+        <h1><span style={styles}>Box for {name}</span></h1>
     )
 }
 
