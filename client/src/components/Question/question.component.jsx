@@ -87,7 +87,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
                 ))
             }
             <VerticalContainer>
-                <CustomInput label="add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+                <CustomInput label="Add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
                 <CustomButton onClick={handleSubmit}>Add</CustomButton>
             </VerticalContainer>
 

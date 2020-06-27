@@ -6,17 +6,24 @@ import { Container } from '@material-ui/core';
 import VerticalContainer from '../components/containers/vertical-container.component'
 import CustomInput from '../components/CustomInput/custom_input.component'
 import CustomButton from '../components/CustomButton/custom_button.component'
+import './Letterbox.css'
 
 
 const DisplayBox = ({ name }) => {
 
     const styles = {
-        fontFamily: 'Montserrat',
-        fontSize: '2.5rem',
+        name: {
+            fontFamily: 'Montserrat',
+            display: 'block',
+            textAlign: 'center',
+            letterSpacing: '3px'
+        }
     }
 
     return (
-        <h1><span style={styles}>Box for {name}</span></h1>
+        <h1>
+            <span style={styles.name}>{name.toUpperCase()}</span>
+        </h1>
     )
 }
 
@@ -91,16 +98,17 @@ const Letterbox = (props) => {
         (
             <div>
                 <Container maxWidth="md">
-                    {
-                        box &&
-                        <DisplayBox name={box.metadata.createdBy} />
-                    }
+                    <div className="question-container header-animated">
+                        {
+                            box &&
+                            <DisplayBox name={box.metadata.createdBy} />
+                        }
 
-                    <VerticalContainer style={{ marginBottom: '50px' }}>
-                        <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
-                        <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
-                    </VerticalContainer>
-                    <hr />
+                        <VerticalContainer style={{ marginBottom: '50px' }}>
+                            <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
+                            <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
+                        </VerticalContainer>
+                    </div>
 
                     <VerticalContainer>
                         {
