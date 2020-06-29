@@ -1,5 +1,5 @@
 .question-container {
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     animation: moveInFromLeft 1s ease-out;

@@ -17,13 +17,17 @@ const DisplayBox = ({ name }) => {
             display: 'block',
             textAlign: 'center',
             letterSpacing: '3px'
+        },
+        displayBox: {
         }
     }
 
     return (
-        <h1>
-            <span style={styles.name}>{name.toUpperCase()}</span>
-        </h1>
+        <div style={styles.displayBox}>
+            <h1>
+                <span style={styles.name}>{name.toUpperCase()}</span>
+            </h1>
+        </div>
     )
 }
 
@@ -75,6 +79,9 @@ const Letterbox = (props) => {
     }
 
     const addQuestion = () => {
+
+        if (newQuestion.trim() === '') return;
+
         const questionToAdd = {
             text: newQuestion,
             timestamp: + new Date(),
@@ -86,6 +93,11 @@ const Letterbox = (props) => {
             .collection('questions')
             .add(questionToAdd)
             .then(_ => setNewQuestion(''))
+    }
+
+    const sortingMethods = {
+        byUpvotes: (a, b) => b.upvotes - a.upvotes,
+        byMostRecent: (a, b) => b.timestamp - a.timestamp
     }
 
     useEffect(() => {
@@ -112,7 +124,7 @@ const Letterbox = (props) => {
 
                     <VerticalContainer>
                         {
-                            questions.sort((a, b) => b.upvotes - a.upvotes)
+                            questions.sort(sortingMethods.byMostRecent)
                                 .map(question => (
                                     <Question question={question} key={question.id} boxId={boxId} />
                                 ))

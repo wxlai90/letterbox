@@ -37,9 +37,13 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
         setQuestionFocus(questionId)
     }
 
+    const hasVoted = (questionId) => {
+        return upvoted.indexOf(questionId) !== -1
+    }
+
     const upvoteQuestion = () => {
         const questionId = props.question.id;
-        if (upvoted.indexOf(questionId) !== -1) return;
+        if (hasVoted(questionId)) return;
 
         addUpvoted(questionId)
 
@@ -73,17 +77,42 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
                 <h4 style={{ fontFamily: 'Ubuntu' }}>{formatQuestion(props.question.text)}</h4>
                 <Divider style={{ margin: '10px 0' }} />
                 <HorizontalContainer onClick={upvoteQuestion} style={{ cursor: 'pointer' }}>
-                    {props.question.upvotes} Votes
-                    <KeyboardArrowUpIcon />
+                    {props.question.upvotes === 1 ? `${props.question.upvotes} Vote` : `${props.question.upvotes} Votes`}
+                    {
+                        !hasVoted(props.question.id) && <KeyboardArrowUpIcon />
+                    }
                 </HorizontalContainer>
                 <Divider style={{ margin: '10px 0' }} />
             </VerticalContainer>
 
-            <h4>Comments: </h4>
+            {
+                focusedQuestionId === props.question.id ? <h4>Comments:</h4> : <div style={{ cursor: 'pointer' }}>
+                    <span>
+                        {
+                            comments.length === 0
+                                ?
+                                <span>
+                                    <span style={{ marginRight: '3px' }}>No comments yet</span>
+                                    <Badge badgeContent={comments.length} color="secondary">
+                                        <MailIcon />
+                                    </Badge>
+                                </span>
+                                :
+                                <span>
+                                    <span style={{ marginRight: '3px' }}>Show comments</span>
+                                    <Badge badgeContent={comments.length} color="secondary">
+                                        <MailIcon />
+                                    </Badge>
+                                </span>
+                        }
+                    </span>
+                </div>
+            }
+
             {
                 focusedQuestionId === props.question.id &&
                 comments.sort((a, b) => a.timestamp - b.timestamp).map(comment => (
-                    <Comment comment={comment} />
+                    <Comment comment={comment} key={comment.id} />
                 ))
             }
             <VerticalContainer>
@@ -92,13 +121,7 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
             </VerticalContainer>
 
 
-            <span>
-                {
-                    <Badge badgeContent={comments.length} color="secondary" style={{ cursor: 'pointer', marginTop: '10px' }}>
-                        <MailIcon />
-                    </Badge>
-                }
-            </span>
+
         </Container>
     )
 }
