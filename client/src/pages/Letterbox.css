@@ -10,6 +10,32 @@
     animation: moveInFromBottom 1s ease-out;
 }
 
+
+.hero-banner {
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+    background: linear-gradient(rgba(0, 0, 0, 0.295), rgba(0, 0, 0, 0.308)),
+        linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    background-position: center;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 @keyframes moveInFromBottom {
     0% {
         opacity: 0;

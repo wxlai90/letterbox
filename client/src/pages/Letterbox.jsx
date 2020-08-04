@@ -14,20 +14,17 @@ const DisplayBox = ({ name }) => {
     const styles = {
         name: {
             fontFamily: 'Montserrat',
-            display: 'block',
-            textAlign: 'center',
-            letterSpacing: '3px'
-        },
-        displayBox: {
+            letterSpacing: '20px',
+            fontWeight: '100',
+            fontSize: '80px',
+            color: '#fff'
         }
     }
 
     return (
-        <div style={styles.displayBox}>
-            <h1>
-                <span style={styles.name}>{name.toUpperCase()}</span>
-            </h1>
-        </div>
+        <h1>
+            <span style={styles.name}>{name.toUpperCase()}</span>
+        </h1>
     )
 }
 
@@ -109,13 +106,14 @@ const Letterbox = (props) => {
         ?
         (
             <div>
+                <div className="hero-banner">
+                    {
+                        box &&
+                        <DisplayBox name={box.metadata.createdBy} />
+                    }
+                </div>
                 <Container maxWidth="md">
                     <div className="question-container header-animated">
-                        {
-                            box &&
-                            <DisplayBox name={box.metadata.createdBy} />
-                        }
-
                         <VerticalContainer style={{ marginBottom: '50px' }}>
                             <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
                             <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
