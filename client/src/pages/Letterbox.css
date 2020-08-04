@@ -12,7 +12,7 @@
 
 
 .hero-banner {
-    height: 20vh;
+    height: 45vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +22,34 @@
     background-size: 400% 400%;
     background-position: center;
     animation: gradient 15s ease infinite;
+}
+
+.hero-banner h1 {
+    text-align: center;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.hero-banner h1 span {
+    font-family: 'Montserrat';
+    letter-spacing: 20px;
+    font-weight: 100;
+    color: #fff;
+    font-size: 5rem;
+    display: inline-block;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+    .hero-banner h1 span {
+        font-size: 2rem;
+    }
+}
+
+
+@media only screen and (max-width: 300px) {
+    .hero-banner h1 span {
+        font-size: 1rem;
+    }
 }
 
 @keyframes gradient {

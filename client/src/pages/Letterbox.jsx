@@ -10,20 +10,9 @@ import './Letterbox.css'
 
 
 const DisplayBox = ({ name }) => {
-
-    const styles = {
-        name: {
-            fontFamily: 'Montserrat',
-            letterSpacing: '20px',
-            fontWeight: '100',
-            fontSize: '80px',
-            color: '#fff'
-        }
-    }
-
     return (
         <h1>
-            <span style={styles.name}>{name.toUpperCase()}</span>
+            <span>{name.toUpperCase()}</span>
         </h1>
     )
 }
