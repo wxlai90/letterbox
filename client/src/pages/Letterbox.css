@@ -22,6 +22,7 @@
     background-size: 400% 400%;
     background-position: center;
     animation: gradient 15s ease infinite;
+    position: relative;
 }
 
 .hero-banner h1 {
@@ -37,6 +38,13 @@
     color: #fff;
     font-size: 5rem;
     display: inline-block;
+}
+
+
+.qr-code-canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {

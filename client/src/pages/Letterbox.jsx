@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Spinner from '../components/spinner/spinner'
 import Question from '../components/Question/question.component'
 import { db } from '../utils/firebase'
@@ -8,10 +8,28 @@ import CustomInput from '../components/CustomInput/custom_input.component'
 import CustomButton from '../components/CustomButton/custom_button.component'
 import './Letterbox.css'
 
+import QRCode from 'qrcode'
 
-const DisplayBox = ({ name }) => {
+
+const DisplayBox = ({ name, currentURL }) => {
+    const canvasRef = useRef();
+    const opts = {
+        color: {
+            light: '#00000000',
+            dark: '#ffffff'
+        }
+    }
+
+    useEffect(() => {
+        QRCode.toCanvas(canvasRef.current, currentURL, opts)
+            .then(_ => { })
+            .catch(error => console.log('error -->', error))
+    }, [])
+
     return (
         <h1>
+            <canvas ref={canvasRef} className="qr-code-canvas">
+            </canvas>
             <span>{name.toUpperCase()}</span>
         </h1>
     )
@@ -21,6 +39,8 @@ const DisplayBox = ({ name }) => {
 const Letterbox = (props) => {
 
     const { match: { params: { boxId } } } = props;
+
+    const currentURL = `${window.location.origin}/${boxId}`
 
     const [box, setBox] = useState(null)
     const [questions, setQuestions] = useState([])
@@ -98,7 +118,7 @@ const Letterbox = (props) => {
                 <div className="hero-banner">
                     {
                         box &&
-                        <DisplayBox name={box.metadata.createdBy} />
+                        <DisplayBox name={box.metadata.createdBy} currentURL={currentURL} />
                     }
                 </div>
                 <Container maxWidth="md">
