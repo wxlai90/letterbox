@@ -26,6 +26,7 @@
 }
 
 .hero-banner h1 {
+    user-select: none;
     text-align: center;
     white-space: pre-wrap;
     word-break: break-all;
@@ -40,9 +41,13 @@
     display: inline-block;
 }
 
+.qr-code-container {
+    padding: 30px 20px;
+}
 
 .qr-code-canvas {
     position: absolute;
+    cursor: pointer;
     top: 0;
     right: 0;
 }

@@ -12,11 +12,25 @@ import QRCode from 'qrcode'
 
 
 const DisplayBox = ({ name, currentURL }) => {
+    const INTIAL_CANVAS_SIZE = 50;
+
+    const [canvasSize, setCanvasSize] = useState(INTIAL_CANVAS_SIZE)
+
     const canvasRef = useRef();
+
     const opts = {
         color: {
             light: '#00000000',
             dark: '#ffffff'
+        },
+        width: canvasSize
+    }
+
+    const resizeCanvas = () => {
+        if (canvasSize === INTIAL_CANVAS_SIZE) {
+            setCanvasSize(150)
+        } else {
+            setCanvasSize(INTIAL_CANVAS_SIZE)
         }
     }
 
@@ -24,14 +38,16 @@ const DisplayBox = ({ name, currentURL }) => {
         QRCode.toCanvas(canvasRef.current, currentURL, opts)
             .then(_ => { })
             .catch(error => console.log('error -->', error))
-    }, [])
+    }, [canvasSize])
 
     return (
-        <h1>
-            <canvas ref={canvasRef} className="qr-code-canvas">
+        <div className="qr-code-container">
+            <h1>
+                <span>{name.toUpperCase()}</span>
+            </h1>
+            <canvas ref={canvasRef} className="qr-code-canvas" onClick={resizeCanvas}>
             </canvas>
-            <span>{name.toUpperCase()}</span>
-        </h1>
+        </div>
     )
 }
 
