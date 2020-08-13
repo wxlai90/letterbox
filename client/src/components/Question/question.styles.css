@@ -5,3 +5,19 @@
     margin: 20px 0;
     padding: 15px 20px;
 }
+
+.question-container h4 {
+    padding: 20px 0 5px;
+}
+
+.comment-input-box {
+    margin-top: 20px;
+}
+
+.comment-input-box textarea {
+    height: 15vh;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    resize: none;
+}

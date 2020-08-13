@@ -54,7 +54,10 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
             })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        console.log(e)
+        debugger
+        e.preventDefault();
         if (newComment.trim().length === 0) return;
 
         db.collection(`boxes/${boxId}/questions/${props.question.id}/comments`)
@@ -109,19 +112,19 @@ const Question = ({ setQuestionFocus, focusedQuestionId, boxId, upvoted, addUpvo
                 </div>
             }
 
-            {
-                focusedQuestionId === props.question.id &&
-                comments.sort((a, b) => a.timestamp - b.timestamp).map(comment => (
-                    <Comment comment={comment} key={comment.id} />
-                ))
-            }
-            <VerticalContainer>
-                <CustomInput label="Add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
-                <CustomButton onClick={handleSubmit}>Add</CustomButton>
-            </VerticalContainer>
-
-
-
+            <form onSubmit={handleSubmit}>
+                {
+                    focusedQuestionId === props.question.id &&
+                    comments.sort((a, b) => a.timestamp - b.timestamp).map(comment => (
+                        <Comment comment={comment} key={comment.id} />
+                    ))
+                }
+                <VerticalContainer className="comment-input-box">
+                    <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment">
+                    </textarea>
+                    <CustomButton onClick={handleSubmit}>Add</CustomButton>
+                </VerticalContainer>
+            </form>
         </Container>
     )
 }

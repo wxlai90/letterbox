@@ -7,19 +7,21 @@ const Comment = ({ comment }) => {
 
     const timeDisplay = () => {
         const nMinutes = lessThanNMinutesAgo(comment.timestamp);
-        if(nMinutes === 0){
-            return "Just now"
+        if (nMinutes === 0) {
+            return "JUST NOW"
         }
 
         if (nMinutes < 30) {
-            return nMinutes === 1 ? `${nMinutes} minute ago` : `${nMinutes} minutes ago`
+            return nMinutes === 1 ? `${nMinutes} MINUTE AGO` : `${nMinutes} MINUTES AGO`
         }
 
         return timestampToDate(comment.timestamp)
     }
 
     return (
-        <p className="comment-item">{comment.text} <i>- {timeDisplay()}</i></p>
+        <div className="comment-box">
+            <p className="comment-item">{comment.text} <i className="comment__item--time">{timeDisplay()}</i></p>
+        </div>
     )
 }
 
