@@ -1,8 +1,19 @@
-.question-container {
+.add-question-container {
     border: none;
+    margin: 50px 0;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     animation: moveInFromLeft 1s ease-out;
+    padding: 20px;
+}
+
+.add-question-container input {
+    height: 10vh;
+}
+
+.add-question-container button {
+    width: 20vw;
+    margin: 20px auto 0 !important;
 }
 
 
@@ -52,9 +63,22 @@
     right: 0;
 }
 
+.questions-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+
+
 @media only screen and (min-width: 300px) and (max-width: 734px) {
     .hero-banner h1 span {
         font-size: 2rem;
+    }
+
+    .add-question-container button {
+        width: 75vw;
     }
 }
 

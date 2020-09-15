@@ -137,22 +137,22 @@ const Letterbox = (props) => {
                         <DisplayBox name={box.metadata.createdBy} currentURL={currentURL} />
                     }
                 </div>
-                <Container maxWidth="md">
-                    <div className="question-container header-animated">
-                        <VerticalContainer style={{ marginBottom: '50px' }}>
+                <Container>
+                    <div className="add-question-container header-animated">
+                        <VerticalContainer>
                             <CustomInput label="Add a question" value={newQuestion} onChange={handleNewQuestion} />
                             <CustomButton color="primary" onClick={addQuestion}>Add a question</CustomButton>
                         </VerticalContainer>
                     </div>
 
-                    <VerticalContainer>
+                    <div className="questions-gallery">
                         {
                             questions.sort(sortingMethods.byMostRecent)
                                 .map(question => (
                                     <Question question={question} key={question.id} boxId={boxId} />
                                 ))
                         }
-                    </VerticalContainer>
+                    </div>
                 </Container>
             </div>
         )
